@@ -12,13 +12,13 @@ metadata:
     argocd-image-updater.argoproj.io/back.ignore-tags: latest
   name: ats
   namespace: argocd
-spec:
-  generators:
-  - list:
-      elements:
-        - cluster: bronze
-          url: https://kubernetes.default.svc
-          namespace: ats-dev
+# spec:
+#   generators:
+#   - list:
+#       elements:
+#         - cluster: bronze
+#           url: https://kubernetes.default.svc
+#           namespace: ats-dev
         # - cluster: silver
         #   url: https://kubernetes.default.svc
         #   namespace: qa
@@ -27,16 +27,16 @@ spec:
         #   namespace: prod
   template:
     metadata:
-      name: '{{cluster}}-ats'
+      name: 'bronze-ats'
     spec:
       project: argocd-demo
       source:
         repoURL: https://github.com/angelaranda200/argocd-prueba.git
         targetRevision: HEAD
-        path: deploy-prueba/overlays/{{cluster}}
+        path: deploy-prueba/overlays/bronze
       destination:
-        server: '{{url}}'
-        namespace: '{{namespace}}'
+        server: https://kubernetes.default.svc
+        namespace: ats-dev
       syncPolicy:
         syncOptions:
           - CreateNamespace=true
