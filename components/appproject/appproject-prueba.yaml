@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: ats
+  namespace: argocd # this ns is a must, as the project must be deployed in the same ns where argocd lives
+spec:
+  description: prueba-project
+  sourceRepos:
+    - '*'
+  destinations:
+    - namespace: '*' # this allows all ns, to disallow certain ns use '!ns' for example namespace: '!istio-system'
+      server: https://kubernetes.default.svc
+      name: in-cluster
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'

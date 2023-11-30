@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: quarkus-app
+  namespace: ats-dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: quarkus-app
+  template:
+    metadata:
+      labels:
+        app: quarkus-app
+    spec:
+      containers:
+        - name: quarkus-app
+          image: angelaranda04/quarkus-prueba:301120230101-a1c64
+          ports:
+            - containerPort: 8080
+      #     env:
+      #       - name: QUARKUS_DATASOURCE_JDBC_URL
+      #         value: "jdbc:postgresql://postgres.ats-dev.svc.cluster.local:5432/joyit"
+      #       - name: QUARKUS_DATASOURCE_USERNAME
+      #         value: "postgres"
+      #       - name: QUARKUS_DATASOURCE_PASSWORD
+      #         value: "password"
+      # initContainers:
+      # - name: init-postgres-service
+      #   image: busybox
+      #   command: ['sh', '-c', 'until nslookup postgres.ats-dev.svc.cluster.local; do echo waiting for postgres.dev.svc.cluster.local; sleep 2; done;']
+      # restartPolicy: Always 
+      # imagePullSecrets: 
+      #   - name: analistait05-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: quarkus-app-service
+  namespace: ats-dev
+spec:
+  selector:
+    app: quarkus-app
+  ports:
+   -  port: 8080
+      targetPort: 8080
+ 

@@ -1,0 +1,53 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: back=angelaranda04/quarkus-prueba:301120230101-a1c64
+    argocd-image-updater.argoproj.io/back.update-strategy: name
+    argocd-image-updater.argoproj.io/back.platforms: linux/amd64
+    # argocd-image-updater.argoproj.io/front.pull-secret: ats-dev/analistait02-secret
+    # argocd-image-updater.argoproj.io/back.pull-secret: ats-dev/analistait05-secret
+    # argocd-image-updater.argoproj.io/front.allow-tags: regexp:^[0-9]{2})([0-9]{2})([0-9]{4})([0-9]{2})([0-9]{2})-([0-9a-z]{5}$
+    argocd-image-updater.argoproj.io/back.allow-tags: regexp:^[0-9]{2})([0-9]{2})([0-9]{4})([0-9]{2})([0-9]{2})-([0-9a-z]{5}$
+    argocd-image-updater.argoproj.io/write-back-method: git
+    argocd-image-updater.argoproj.io/git-branch: main
+    # argocd-image-updater.argoproj.io/front.force-update: "true"
+    argocd-image-updater.argoproj.io/back.force-update: "true"
+    # argocd-image-updater.argoproj.io/front.ignore-tags: latest
+    argocd-image-updater.argoproj.io/back.ignore-tags: latest
+    # argocd-image-updater.argoproj.io/back.kustomize.image-name: analistait05/demo-back
+  name: ats
+  namespace: argocd
+spec:
+  generators:
+  - list:
+      elements:
+        - cluster: bronze
+          url: https://kubernetes.default.svc
+          namespace: ats-dev
+        # - cluster: silver
+        #   url: https://kubernetes.default.svc
+        #   namespace: qa
+        # - cluster: gold
+        #   url: https://kubernetes.default.svc
+        #   namespace: prod
+  template:
+    metadata:
+      name: '{{cluster}}-ats'
+    spec:
+      project: ats
+      source:
+        repoURL: https://github.com/angelaranda200/prueba-quarkus.git
+        targetRevision: HEAD
+        path: deploy-prueba/overlays/{{cluster}}
+      destination:
+        server: '{{url}}'
+        namespace: '{{namespace}}'
+      syncPolicy:
+        syncOptions:
+          - CreateNamespace=true
+          - ApplyOutOfSyncOnly=true
+          - PruneLast=true
+        automated:
+          selfHeal: true
+          prune: true
