@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
-  name: ats
+  name: argocd-demo
   namespace: argocd # this ns is a must, as the project must be deployed in the same ns where argocd lives
 spec:
   description: prueba-project
