@@ -29,7 +29,7 @@ spec:
     metadata:
       name: '{{cluster}}-ats'
     spec:
-      project: ats
+      project: default
       source:
         repoURL: https://github.com/angelaranda200/argocd-prueba.git
         targetRevision: HEAD
