@@ -2,8 +2,8 @@ apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
   annotations:
-    argocd-image-updater.argoproj.io/image-list: back=angelaranda04/quarkus-prueba:301120230101-a1c64
-    argocd-image-updater.argoproj.io/back.update-strategy: name
+    argocd-image-updater.argoproj.io/image-list: back=angelaranda04/quarkus-prueba:~2.1.x
+    argocd-image-updater.argoproj.io/back.update-strategy: semver
     argocd-image-updater.argoproj.io/back.platforms: linux/amd64
     # argocd-image-updater.argoproj.io/back.allow-tags: regexp:^[0-9]{2})([0-9]{2})([0-9]{4})([0-9]{2})([0-9]{2})-([0-9a-z]{5}$
     argocd-image-updater.argoproj.io/write-back-method: git
