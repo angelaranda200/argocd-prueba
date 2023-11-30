@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: quarkus-app
-          image: angelaranda04/quarkus-prueba:301120230101-a1c64
+          image: angelaranda04/quarkus-prueba:2.1.0
           ports:
             - containerPort: 8080
       #     env:
