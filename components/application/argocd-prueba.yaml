@@ -37,7 +37,7 @@ spec:
     spec:
       project: ats
       source:
-        repoURL: https://github.com/angelaranda200/prueba-quarkus.git
+        repoURL: https://github.com/angelaranda200/argocd-prueba.git
         targetRevision: HEAD
         path: deploy-prueba/overlays/{{cluster}}
       destination:
