@@ -3,7 +3,7 @@ kind: ApplicationSet
 metadata:
   annotations:
     argocd-image-updater.argoproj.io/image-list: back=angelaranda04/quarkus-prueba:301120230101-a1c64
-    argocd-image-updater.argoproj.io/back.update-strategy: name
+    argocd-image-updater.argoproj.io/back.update-strategy: digest
     argocd-image-updater.argoproj.io/back.platforms: linux/amd64
     # argocd-image-updater.argoproj.io/front.pull-secret: ats-dev/analistait02-secret
     # argocd-image-updater.argoproj.io/back.pull-secret: ats-dev/analistait05-secret
