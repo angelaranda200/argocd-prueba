@@ -25,9 +25,9 @@ metadata:
         # - cluster: gold
         #   url: https://kubernetes.default.svc
         #   namespace: prod
-  template:
-    metadata:
-      name: 'bronze-ats'
+  # template:
+  #   metadata:
+  #     name: 'bronze-ats'
     spec:
       project: argocd-demo
       source:
