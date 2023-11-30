@@ -3,19 +3,13 @@ kind: ApplicationSet
 metadata:
   annotations:
     argocd-image-updater.argoproj.io/image-list: back=angelaranda04/quarkus-prueba:301120230101-a1c64
-    argocd-image-updater.argoproj.io/back.update-strategy: digest
+    argocd-image-updater.argoproj.io/back.update-strategy: name
     argocd-image-updater.argoproj.io/back.platforms: linux/amd64
-    # argocd-image-updater.argoproj.io/front.pull-secret: ats-dev/analistait02-secret
-    # argocd-image-updater.argoproj.io/back.pull-secret: ats-dev/analistait05-secret
-    # argocd-image-updater.argoproj.io/front.allow-tags: regexp:^[0-9]{2})([0-9]{2})([0-9]{4})([0-9]{2})([0-9]{2})-([0-9a-z]{5}$
-    argocd-image-updater.argoproj.io/back.allow-tags: regexp:^[0-9]{2})([0-9]{2})([0-9]{4})([0-9]{2})([0-9]{2})-([0-9a-z]{5}$
+    # argocd-image-updater.argoproj.io/back.allow-tags: regexp:^[0-9]{2})([0-9]{2})([0-9]{4})([0-9]{2})([0-9]{2})-([0-9a-z]{5}$
     argocd-image-updater.argoproj.io/write-back-method: git
     argocd-image-updater.argoproj.io/git-branch: master:image-updater-{{.SHA256}}
-    # argocd-image-updater.argoproj.io/front.force-update: "true"
     argocd-image-updater.argoproj.io/back.force-update: "true"
-    # argocd-image-updater.argoproj.io/front.ignore-tags: latest
     argocd-image-updater.argoproj.io/back.ignore-tags: latest
-    # argocd-image-updater.argoproj.io/back.kustomize.image-name: analistait05/demo-back
   name: ats
   namespace: argocd
 spec:
